@@ -9,14 +9,14 @@ const getReadStream = pathStr => {
     return process.stdin;
   }
   process.stderr.write("Input file does not found\n");
-  process.exit();
+ process.exit(1);
 };
 
 const getWriteStream = (pathStr) => {
   if (fs.existsSync(pathStr)) return fs.createWriteStream(pathStr);
   if (!pathStr) return process.stdout;
   process.stderr.write("Output file does not found\n");
-  process.exit();
+  process.exit(1);
 };
 
 const getTransformerStream = (action, shift) => {
@@ -31,8 +31,8 @@ const getTransformerStream = (action, shift) => {
         if (action === "encode") this.push(encode(chunk.toString(), shift));
         if (action === "decode") this.push(decode(chunk.toString(), shift));
         if (action !== "encode" && action !== "decode") {
-          console.error(`exeption  getTransformerStream(), creatStreem.js[str39], action = ${action}`);
-          process.exit();
+          console.error(`exeption  getTransformerStream(), creatStreem.js[str34], action = ${action}`);
+         process.exit(1);
           done();
         }
       } catch (err) {
